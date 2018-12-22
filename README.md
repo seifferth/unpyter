@@ -39,19 +39,6 @@ for use from the command prompt (as opposed to possible use as a python
 library) is strongly recommended.
 
 
-## Known Issues
-
-- The notebook's metadata is currently not preserved. When converting to
-  plain python, all metadata is discarded, and when converting to ipynb,
-  hardcoded values are used. Should a usecase arise, however, I might
-  consider adding this feature.
-- The output of code cells is not preserved either and there are no
-  plans of adding this capacity in the future. If you need to produce
-  notebooks that contain such output, you might want to pipe the resulting
-  notebook through nbconvert as such:
-  `unpyter filename.py | jupyter nbconvert --stdin --stdout --to notebook --execute --allow-errors > filename.ipynb`
-
-
 ## Usage example
 
 Say you have a jupyter notebook called `hello.ipynb`, containing some
@@ -104,3 +91,16 @@ print("Good evening")
 ```
 
 [![](docs/hello_modified.png)](docs/hello_modified.ipynb)
+
+
+## Known Issues
+
+- The notebook's metadata is currently not preserved. When converting to
+  plain python, all metadata is discarded, and when converting to ipynb,
+  hardcoded values are used. Should a usecase arise, however, I might
+  consider adding this feature.
+- The output of code cells is not preserved either and there are no
+  plans of adding this capacity in the future. If you need to produce
+  notebooks that contain such output, you might want to pipe the resulting
+  notebook through nbconvert as such:
+  `unpyter filename.py | jupyter nbconvert --stdin --stdout --to notebook --execute --allow-errors > filename.ipynb`
