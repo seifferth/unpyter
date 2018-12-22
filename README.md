@@ -21,9 +21,9 @@ comments, so that it doesn't interfere with execution of the resulting
 script. The real power of `unpyter`, however, lies in the fact that the
 resulting python script (unlike, for example, the script produced by
 `jupyter nbconvert` when converting to plain python) can be used to
-create the exact same jupyter notebook that was used to create it in
-the first place. This is achieved by invoking `unpyter` with the path to
-a file with `.py` extension as the first argument. `unpyter` therefore
+create the exact same jupyter notebook that was used to create the script
+in the first place. This is achieved by invoking `unpyter` with the path
+to a file with `.py` extension as the first argument. `unpyter` therefore
 allows to switch back and forth between working with jupyter notebooks
 and working with plain python scripts with relative ease and to use a
 wide range of different tools for editing and debugging along the way.
@@ -43,69 +43,21 @@ library) is strongly recommended.
 
 - The notebook's metadata is currently not preserved. When converting to
   plain python, all metadata is discarded, and when converting to ipynb,
-  hardcoded values are used. Should a usecase arise however, I might
+  hardcoded values are used. Should a usecase arise, however, I might
   consider adding this feature.
 - The output of code cells is not preserved either and there are no
   plans of adding this capacity in the future. If you need to produce
   notebooks that contain such output, you might want to pipe the resulting
   notebook through nbconvert as such:
-  `unpyter filename.py | jupyter nbconvert --stdin --stdout --to notebook --execute > filename.ipynb`
+  `unpyter filename.py | jupyter nbconvert --stdin --stdout --to notebook --execute --allow-errors > filename.ipynb`
 
 
 ## Usage example
 
 Say you have a jupyter notebook called `hello.ipynb`, containing some
-simple hello-world-content:
+simple hello-world-content (the source is hidden behind a link):
 
 [![](docs/hello.png)](docs/hello.ipynb)
-
-The corresponding source looks like this:
-
-```json
-{
- "cells": [
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "# Hello world\n",
-    "\n",
-    "Good morning"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "print(\"Hello world\")"
-   ]
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.7.1"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 2
-}
-```
 
 Running `unpyter hello.ipynb > hello.py` on the commandline will produce
 the following script:
