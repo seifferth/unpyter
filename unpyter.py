@@ -98,17 +98,21 @@ def py_to_ipynb(doc: str) -> str:
 
 if __name__ == "__main__":
     usage = "Usage: unpyter <filename>"
-    if len(sys.argv) == 2:
-        if sys.argv[1] in ["-h", "--help"]:
-            print(usage)
-            exit(0)
-        elif os.path.isfile(sys.argv[1]):
-            with open(sys.argv[1]) as f:
-                doc = f.read()
-            if sys.argv[1].endswith(".ipynb"):
-                print(ipynb_to_py(doc))
-            elif sys.argv[1].endswith(".py"):
-                print(py_to_ipynb(doc))
-    else:
+
+    if len(sys.argv) != 2:
+        print(usage, file=sys.stderr)
+        exit(1)
+
+    if sys.argv[1] in ["-h", "--help"]:
         print(usage)
+        exit(0)
+    elif os.path.isfile(sys.argv[1]):
+        with open(sys.argv[1]) as f:
+            doc = f.read()
+        if sys.argv[1].endswith(".ipynb"):
+            print(ipynb_to_py(doc))
+        elif sys.argv[1].endswith(".py"):
+            print(py_to_ipynb(doc))
+    else:
+        print(usage, file=sys.stderr)
         exit(1)
