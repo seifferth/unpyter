@@ -77,7 +77,7 @@ def py_to_ipynb(doc: str) -> str:
         del py[0]
     # Process all cells
     celltype = "code"
-    regex_newcell = re.compile("###+ *([a-z]+) +cell *###+")
+    regex_newcell = re.compile("^ *###+ *([a-z]+) +cell *###+ *$")
     for line in py:
         if regex_newcell.match(line):
             remove_trailing_newlines(cells)
