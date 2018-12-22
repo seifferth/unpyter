@@ -128,7 +128,7 @@ print("Good morning")
 print("Good evening")
 ```
 
-![](docs/hello_modified.png)
+[![](docs/hello_modified.png)](docs/hello_modified.ipynb)
 
 
 ## Installing
