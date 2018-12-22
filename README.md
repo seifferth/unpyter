@@ -39,7 +39,7 @@ for use from the command prompt (as opposed to possible use as a python
 library) is strongly recommended.
 
 
-## Usage example
+## Usage Example
 
 Say you have a jupyter notebook called `hello.ipynb`, containing some
 simple hello-world-content (the source is hidden behind a link):
