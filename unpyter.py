@@ -57,10 +57,11 @@ def py_to_ipynb(doc: str) -> str:
 
     def remove_trailing_newlines(cells):
         try:
-            while cells[-1]["source"][-1] == "\n":
-                del cells[-1]["source"][-1]
-            if cells[-1]["source"][-1][-1] == "\n":
-                cells[-1]["source"][-1] = cells[-1]["source"][-1][:-1]
+            source = cells[-1]["source"]
+            while source[-1].strip() == "":
+                del source[-1]
+            if source[-1][-1] == "\n":
+                source[-1] = source[-1][:-1]
         except IndexError:
             pass
 
