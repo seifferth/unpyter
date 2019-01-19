@@ -68,6 +68,14 @@ def py_to_ipynb(doc: str) -> str:
     def is_empty(line):
         return line == "" or re.match("^# *$", line)
 
+    def implicit_codecell(line):
+        if celltype == "code":
+            return False
+        l_0 = line.strip()[:1]
+        if l_0 and l_0 != "#":
+            return True
+        return False
+
     py = doc.splitlines()
     ipynb = new_ipynb()
     cells = ipynb["cells"]
@@ -84,6 +92,11 @@ def py_to_ipynb(doc: str) -> str:
             remove_trailing_newlines(cells)
             celltype = regex_newcell.match(line).groups()[0]
             cells.append(new_cell(celltype))
+        elif implicit_codecell(line):
+            remove_trailing_newlines(cells)
+            celltype = "code"
+            cells.append(new_cell("code"))
+            cells[-1]["source"].append(line+"\n")
         elif cells and not cells[-1]["source"] and is_empty(line):
             pass    # Remove initial newlines
         else:
