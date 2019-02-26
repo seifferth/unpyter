@@ -127,6 +127,10 @@ if __name__ == "__main__":
             print(ipynb_to_py(doc))
         elif sys.argv[1].endswith(".py"):
             print(py_to_ipynb(doc))
+        else:
+            print("Filename extension not recognized. Supported\n"
+                  "extensions are '.py' or '.ipynb'.", file=sys.stderr)
+            exit(1)
     else:
         print(usage, file=sys.stderr)
         exit(1)
