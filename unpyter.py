@@ -111,26 +111,27 @@ def py_to_ipynb(doc: str) -> str:
 
 
 if __name__ == "__main__":
-    usage = "Usage: unpyter <filename>"
-
-    if len(sys.argv) != 2:
-        print(usage, file=sys.stderr)
-        exit(1)
-
-    if sys.argv[1] in ["-h", "--help"]:
+    usage = "Usage: unpyter [--help] [FILE]"
+    if "-h" in sys.argv or "--help" in sys.argv:
         print(usage)
         exit(0)
-    elif os.path.isfile(sys.argv[1]):
-        with open(sys.argv[1]) as f:
-            doc = f.read()
-        if sys.argv[1].endswith(".ipynb"):
-            print(ipynb_to_py(doc))
-        elif sys.argv[1].endswith(".py"):
-            print(py_to_ipynb(doc))
-        else:
-            print("Filename extension not recognized. Supported\n"
-                  "extensions are '.py' or '.ipynb'.", file=sys.stderr)
-            exit(1)
+    elif len(sys.argv) > 2:
+        print("Only one FILE may be specified", file=sys.stderr)
+        exit(1)
+
+    infilename = "-" if len(sys.argv) == 1 else sys.argv[1]
+    if infilename == "-":
+        doc = sys.stdin.read()
     else:
-        print(usage, file=sys.stderr)
+        with open(infilename) as f:
+            doc = f.read()
+    if doc.startswith("{"):
+        print(ipynb_to_py(doc))
+    elif doc.startswith("#!/usr/bin/env python3"):
+        print(py_to_ipynb(doc))
+    else:
+        print("Input format not recognized. Input files must either "
+              "start with an\nopening curly brace if they are in ipynb "
+              "format, or with a shebang\nof '#!/usr/bin/env python3'. "
+              "Other file formats and shebangs are\nnot supported.")
         exit(1)
