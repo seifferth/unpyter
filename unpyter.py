@@ -40,7 +40,7 @@ def py_to_ipynb(doc: str) -> str:
                          'name': 'python',
                          'nbconvert_exporter': 'python',
                          'pygments_lexer': 'ipython3',
-                         'version': '3.7.1' } },
+                         'version': sys.version.split()[0] } },
                  "nbformat": 4, "nbformat_minor": 2 }
 
     def new_cell(celltype):
