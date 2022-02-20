@@ -104,3 +104,9 @@ print("Good evening")
   notebooks that contain such output, you might want to pipe the resulting
   notebook through nbconvert as such:
   `unpyter filename.py | jupyter nbconvert --stdin --stdout --to notebook --execute --allow-errors > filename.ipynb`
+
+## License
+
+All files in this repository are made available under the terms of the
+GNU General Purpose License, version 3 or later. A copy of that license
+is included in the repository as `LICENSE.txt`.
